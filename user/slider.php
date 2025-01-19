@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/slider.css">
     <title>slider</title>
+    
 </head>
 <body>
     <div class="container">
@@ -18,10 +19,10 @@
             </div>
         </div>
         <div class="button-holder">
-            <a href="#slider-img-1" class="button"></a>
-            <a href="#slider-img-2" class="button"></a>
-            <a href="#slider-img-3" class="button"></a>
-            <a href="#slider-img-4" class="button"></a>
+            <a href="#slider-img-1" class="button" id="b1"></a>
+            <a href="#slider-img-2" class="button" id="b2"></a>
+            <a href="#slider-img-3" class="button" id="b3"></a>
+            <a href="#slider-img-4" class="button" id="b4"></a>
         </div>
     </div>
     
