@@ -1,0 +1,78 @@
+/* Resetting default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styles for the overall slider component */
+.container {
+    position: relative;
+    /* top: 120px; */
+}
+
+/* Wrapper styles for the main slider section */
+.container .wrapper {
+    width: 90vw;
+    height: 55vh;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+    margin: 5rem auto;
+    overflow: hidden;
+}
+
+/* Holder for the slider items using grid layout */
+.container .wrapper-holder {
+    display: grid;
+    grid-template-columns: repeat(4, 100%);
+    height: 100%;
+    width: 100%;
+    
+}
+
+/* Individual slider item styles */
+.container #slider-img-1 {
+    /* background-image: url(back.jpg); */
+    /* background-position: center; */
+    background-color: black;
+}
+
+.container #slider-img-2 {
+    /* background-image: url(popflix.png); */
+    /* background-position: center; */
+    background-color: antiquewhite;
+}
+
+.container #slider-img-3 {
+    /* background-image: url(profile.png); */
+    /* background-position: center; */
+    background-color: aqua;
+}
+
+.container #slider-img-4 {
+    /* background-image: url(img/photo-1600185365483-26d7a4cc7519.jpg); */
+    /* background-position: center; */
+    background-color: aquamarine;
+}
+
+/* Navigation buttons for the slider */
+.container .button-holder .button {
+    background-color: white;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 0.3rem;
+}
+
+/* Button holder for positioning buttons at the bottom center */
+.container .button-holder {
+    position: absolute;
+    left: 45%;
+    bottom: 0%;
+}
+
+/* Hover effect for navigation buttons */
+.button:hover {
+    box-shadow: 0px 0px 7px 4px rgba(0, 255, 255, 0.6);
+}
+
+

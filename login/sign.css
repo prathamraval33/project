@@ -1,0 +1,71 @@
+/* Global Reset Styles */
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    color: #F5D2D2;
+}
+
+/* Body  */
+body {
+    background-image: url("../img/back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Form Container Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    align-items: center;
+    position: relative;
+    top: 15vh;
+    left: 25vw;
+    height: 70vh;
+    width: 50vw;
+    background-color: rgba(0, 0, 0, 0.463);
+    box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);
+    border-radius: 5%;
+}
+
+/* Input Box */
+.box {
+    width: 20vw;
+    margin-top: 4.3vh;
+    height: 4vh;
+    margin-left: 15vw;
+    background-color: rgba(0, 0, 0, 0.463);
+    box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);
+    border: none;
+    outline: none;
+    border-radius: 10%;
+}
+
+/* Submit Button Styling */
+#submit {
+    display: block;
+    margin-left: 20vw;
+    margin-top: 4.1vh;
+    width: 7vw;
+    background-color: rgba(0, 0, 0, 0.463);
+    box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);
+    color: #F5D2D2;
+    border: none;
+    outline: none;
+    border-radius: 10%;
+}
+
+/* sign in */
+p {
+    position: relative;
+    display: inline;
+    font-size: 1rem;
+    font-style: oblique;
+    color: #F5D2D2;
+    margin-bottom: 0.7vh;
+    bottom: -5vh;
+    left: 2vw;
+    margin-right: 0.5vw;
+}
