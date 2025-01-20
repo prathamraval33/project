@@ -9,41 +9,53 @@
    
 </head>
 <body>
-    <nav class="navbar">
+<nav class="navbar">
     
-        <div class="logo">
-            <a href="#"><img src="../img/popflix.png" class="logoimg"></a>
-            
-        </div>
-            <div class="menu">
-                
-                <a href="#"> HOME</a>
-                <a href="#" style="margin-left: 30px;"  > ABOUT US</a>
-                <a href="#"style="margin-left: 30px;"> CONTACT US</a>
-                <a href="#" style="margin-left: 30px;"> STORY </a>
-                  <div class="dropdown">
-                    <b><p>MOVIE</p></b>
-                    <div class="dropdown-content">
-                      <a href="#">Now Showing </a>
-                      <a href="#">Upcoming</a>
-                     
-                    </div>
-                   
-                 
+       
+    
+    <!-- Logo-->
+    <div class="logo">
+        <a href="#"><img src="https://inc42.com/wp-content/uploads/2019/04/social-1.jpg" class="logoimg" alt="Logo"></a>
+    </div>
 
+    <!-- Menu -->
+    <div class="menu">
+        <a href="#">HOME</a>
+        <a href="#">ABOUT US</a>
+        <a href="#">CONTACT US</a>
+        <a href="#">STORY</a>
+        <div class="dropdown">
+            <a href="#">MOVIE</a>
+            <div class="dropdown-content">
+                <a href="#">Now Showing</a>
+                <a href="#">Upcoming</a>
+                <a href="#">Categories</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" placeholder="Search movies, Categories or theaters">
+        <button>Search</button>
+    </div>
+
+    <!-- User Section -->
+    <div class="sign">
+        <img src="https://cdn-icons-png.flaticon.com/512/12828/12828286.png" alt="Profile" class="profile">
+        <div class="signcontent">
+            <div class="dropdown">
+                <a href="#">Profile</a>
+                <div class="dropdown-content">
+                    <a href="#" id="signin">Sign In</a>
+                    <a href="#" id="signup">Sign Up</a>
                 </div>
-                </div>
-                <div class="sign">
-                    <img src="../img/profile.png" alt="profile" class="profile">
-                    <div class="signcontent">
-                    <a href="#" >sign in</a>
-                    <a href="#" >sign up</a>
-                    </div>
-                </div>
-               
-            
-            </nav>
-           
+            </div>
+        </div>
+    </div>
+
+   
+</nav>
             
 </body>
 </html>

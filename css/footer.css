@@ -3,14 +3,14 @@
     padding: 0;
     margin: 0;
     text-decoration: none;
-    color: #16404D;
+    
     list-style-type: none;
     
 }
 
 .foot {
     
-    background-color: #c52b00;
+     background-color: #1e1e1e; 
     position: relative;
     bottom: 0;
     width: 100%;
@@ -18,6 +18,7 @@
     flex-direction: column; /* Stack the content vertically */
     align-items: center; /* Center content horizontally */
     padding: 20px 0;
+    color: #ff6f61;
 
 }
 ul{
@@ -25,18 +26,25 @@ ul{
 }
 li{
     margin-top: 2px;
+    
+}
+a{
+    color: #ff6f61;
 }
 
 .foot .top-section {
     display: flex;
     justify-content: space-around; /* Distribute the content evenly */
     width: 100%; /* Make sure the top section takes full width */
+    color: #ff6f61;
 }
 
 .pages, .links, .social {
     width: 33%;
     padding: 10px;
     text-align: center; /* Center text inside */
+    color: #ff6f61;
+    
 }
 
 .pcon, .lcon, .scon {
@@ -44,29 +52,19 @@ li{
 }
 
 .copyright {
-    border-top: 10px solid #16404D;
-    background-color: #FBF5DD;
+    border-top: 10px solid #F5D2D2;
+    /* background-color: #FBF5DD; */
     width: 100%; /* Make the copyright section take full width */
     text-align: center;
     padding: 10px 0;
     margin-top: 10px;
+    color: #ff6f61;
     
 }
 
 .foot li:hover {
     font-size: 25px;
-    box-shadow: 0px 8px 16px 0px #16404D;
+    box-shadow: 0px 4px 12px 0px #ff6f61;
     transition: font-size 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
 }
 
-/* Media Queries for responsiveness */
-@media screen and (max-width: 768px) {
-    .foot {
-        flex-direction: column; /* Stack elements vertically */
-    }
-
-    .pages, .links, .social {
-        width: 100%; /* Make each section full width */
-        text-align: center;
-    }
-}
