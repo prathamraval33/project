@@ -26,8 +26,8 @@
                 <div class="links">
                     <b><p style="font-weight: bolder;">Links</p></b>
                     <ul>
-                        <li><a href="#">Sign in </a></li>
-                        <li><a href="#">Sign up</a></li>
+                        <li><a href="../login/signin.php">Sign in </a></li>
+                        <li><a href="../login/signup.php">Sign up</a></li>
                         <li><a href="#">Your bookings</a></li>
                         <li><a href="#">FAQS</a></li>
                         

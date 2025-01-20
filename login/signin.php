@@ -33,14 +33,14 @@
     <h2>Sign Up<h2>
             
             <?php
-            $a=$_POST['']
+           
             ?>
                    
                     <input type="email" name="email" placeholder="Enter Your Email" class="box">
                    <input type="password" name="psw" placeholder="Enter Your Password" class="box"> 
                    
                    <input type="submit" id="submit" placeholder="Sign Up">
-            <p>Don't have account?<p><a href="signup.php" style="color: #F5D2D2; display: inline;"> Sign up</a> 
+            <p>Don't have account?<p><a href="signup.php" style="color: #ff6f61; display: inline;"> Sign up</a> 
             </form>
    
 </body>

@@ -54,7 +54,7 @@
                    <input type="password" name="psw" placeholder="Enter Your Password" class="box"> 
                    <input type="password" name="cpsw" placeholder="Re-Enter Your Password" class="box"> 
                    <input type="submit" id="submit" placeholder="Sign Up">
-            <p>Already have account?<p><a href="signin.php" style="color: #F5D2D2; display: inline;"> Sign In</a> 
+            <p>Already have account?<p><a href="signin.php" style="color: #ff6f61; display: inline;"> Sign In</a> 
             </form>
    
 </body>

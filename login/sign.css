@@ -1,10 +1,4 @@
-/* Global Reset Styles */
-* {
-    margin: 0px;
-    padding: 0px;
-    text-decoration: none;
-    color: #F5D2D2;
-}
+
 
 /* Body  */
 body {
@@ -18,7 +12,7 @@ body {
 form {
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
+    border: 2px solid 1e1e1e;
     align-items: center;
     position: relative;
     top: 15vh;
@@ -28,6 +22,7 @@ form {
     background-color: rgba(0, 0, 0, 0.463);
     box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);
     border-radius: 5%;
+    color: #ff6f61;
 }
 
 /* Input Box */
@@ -41,6 +36,7 @@ form {
     border: none;
     outline: none;
     border-radius: 10%;
+    color: #ff6f61;
 }
 
 /* Submit Button Styling */
@@ -51,7 +47,7 @@ form {
     width: 7vw;
     background-color: rgba(0, 0, 0, 0.463);
     box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);
-    color: #F5D2D2;
+    color: #ff6f61;
     border: none;
     outline: none;
     border-radius: 10%;
@@ -63,7 +59,7 @@ p {
     display: inline;
     font-size: 1rem;
     font-style: oblique;
-    color: #F5D2D2;
+    color: #ff6f61;
     margin-bottom: 0.7vh;
     bottom: -5vh;
     left: 2vw;
