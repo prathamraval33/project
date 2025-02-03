@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form</title>
     <link rel="stylesheet" href="sign.css">
+    <style>
+button {
+    display: block;
+    margin-left: 7vw;
+    margin-top: 4.1vh;
+    width: 7vw;
+    background-color: rgba(0, 0, 0, 0.463);
+    box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);
+    color: #ff6f61;
+    border: none;
+    outline: none;
+    border-radius: 10%;
+}
+    </style>
     <script> 
     function validateForm(event) {
             
@@ -29,8 +43,9 @@
 </head>
 <body>
     
-        <form class="form" action="#" onsubmit="return validateForm(event)">
-    <h2>Sign Up<h2>
+<form class="form" action="../login/signin.php" method="post" onsubmit="return validateForm(event);">
+
+    <h2>Sign In<h2>
             
             <?php
            
@@ -39,9 +54,10 @@
                     <input type="email" name="email" placeholder="Enter Your Email" class="box">
                    <input type="password" name="psw" placeholder="Enter Your Password" class="box"> 
                    
-                   <input type="submit" id="submit" placeholder="Sign Up">
+                   <button type="submit" id="submit" placeholder="Sign Up" name="submit">submit</button>
             <p>Don't have account?<p><a href="signup.php" style="color: #ff6f61; display: inline;"> Sign up</a> 
             </form>
    
 </body>
+
 </html>
