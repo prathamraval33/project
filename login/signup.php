@@ -44,10 +44,7 @@
     
         <form class="form" action="signin.php" onsubmit="return validateForm(event)" method="post">
     <h2>Sign Up<h2>
-            <?php
-        
-            ?>
-               
+            
                     <input type="text" name="name" placeholder=" Enter Your Name" class="box">
                     <input type="number" name="number" placeholder="Enter Your Mobile number" class="box" minlength="10" maxlength="10">
                     <input type="email" name="email" placeholder="Enter Your Email" class="box">

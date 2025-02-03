@@ -1,0 +1,98 @@
+
+/* Global Reset Styles */
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    color: #ff6f61;
+}
+
+
+/* Body  */
+body {
+    background-color: #F4EAE6 ;
+}
+
+/* Form Container Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    align-items: center;
+    position: relative;
+    top: 5vh;
+    left: 25vw;
+    height: 85vh;
+    width: 50vw;
+    background-color: rgba(30,30,30,0.7);
+    box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);
+    border-radius: 5%;
+}
+
+/* Input Box */
+.box {
+    width: 20vw;
+    margin-top: 4.3vh;
+    height: 4vh;
+    margin-left: 15vw;
+    background-color: rgba(30, 30, 30, 0.463);
+    box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);
+    border: none;
+    outline: none;
+    color: #ff6f61;
+    border-radius: 10%;
+}
+
+/* Submit Button Styling */
+#submit {
+    display: block;
+    margin-left: 20vw;
+    margin-top: 4.1vh;
+    width: 7vw;
+    background-color: rgba(0, 0, 0, 0.463);
+    box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);
+    color: #ff6f61;
+    border: none;
+    outline: none;
+    border-radius: 10%;
+}
+
+/* sign in */
+p {
+    position: relative;
+    display: inline;
+    font-size: 1rem;
+    font-style: oblique;
+    color: #ff6f61;
+    margin-bottom: 0.7vh;
+    bottom: -5vh;
+    left: 2vw;
+    margin-right: 0.5vw;
+}
+.links
+{
+    display: block;
+    height: 1vh;
+    margin-top: 5vh;
+    margin-left: 18vw;
+}
+h2{
+    margin-top: 2vh;
+}
+p{
+    margin-top: 2vh;
+    margin-left: 5vw;
+}
+.textarea{
+    height: 18vh;
+    margin-top: 4.3vh;
+    margin-left: 15vw;
+    background-color: rgba(30, 30, 30, 0.463);
+    box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);
+    border: none;
+    outline: none;
+    border-radius: 5%;
+}
+::placeholder{
+color: #ff6f61;
+}
