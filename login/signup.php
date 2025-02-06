@@ -6,10 +6,10 @@ if (isset($_POST['submit'])) {
     $unumber = $_POST['number'];
     $uemail = $_POST['email'];
     $upass = $_POST['psw'];
+    $hash1=password_hash($upass,PASSWORD_DEFAULT);
 
     // Insert into database
-    $sql = "INSERT INTO `userinfo10m` (`u_name`, `u_number`, `u_email`, `u_password`) 
-            VALUES ('$uname', '$unumber', '$uemail', '$upass')";
+    $sql = "INSERT INTO `userinfo10m` (`u_name`, `u_number`, `u_email`, `u_password`) VALUES ('$uname', '$unumber', '$uemail', '$hash1')";
     
     $result = mysqli_query($conn, $sql);
 

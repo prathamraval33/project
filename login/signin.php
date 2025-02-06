@@ -1,3 +1,53 @@
+<?php
+session_start(); // Start the session
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    require '../database/_dbconnect.php';  // Ensure the correct path for database connection
+
+    $uemail = trim($_POST['email']);
+    $upass = trim($_POST['psw']); // Trim spaces to avoid mismatch issues
+    
+    // Check if any field is empty
+    if (empty($uemail) || empty($upass)) {
+        echo '<script>alert("Please fill all details!");</script>';
+    } else {
+        // Check if user exists in the database
+        $sql = "SELECT u_name, u_password FROM `userinfo10m` WHERE `u_email` = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $uemail);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            $stored_hashed_password = $row['u_password'];
+            
+            // Debugging: Log retrieved hash and input password
+            error_log("Stored Hash: " . $stored_hashed_password);
+            error_log("Entered Password: " . $upass);
+            
+            // Verify password
+            if (password_verify($upass, $stored_hashed_password)) {
+                $_SESSION['user'] = $row['u_name']; // Store user session
+                header("Location: ../user/index.php"); // Redirect to dashboard
+                exit();
+            } else {
+                error_log("Password verification failed.");
+                echo '<script>alert("Incorrect password! Please try again.");</script>';
+            }
+        } else {
+            error_log("User does not exist.");
+            echo '<script>alert("User does not exist! Please sign up.");</script>';
+        }
+        
+        mysqli_stmt_close($stmt);
+    }
+    mysqli_close($conn);
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,39 +69,15 @@ button {
     border-radius: 10%;
 }
     </style>
-    <script> 
-    function validateForm(event) {
-            
-            var email = document.getElementsByName("email")[0].value.trim();
-           
-            var password = document.getElementsByName("psw")[0].value;
-            
-
-            // Check if any field is empty
-            if ( email === "" || password === "" ) {
-                alert("Please fill all details!");
-                event.preventDefault(); // Stop form submission
-                return false;
-            }
-
-           
-            // Allow form submission if all checks pass
-            alert("Signed In successfully");
-            return true;
-        }
-        </script>
+    
 </head>
 <body>
     
-<form class="form" action="../login/signin.php" method="post" onsubmit="return validateForm(event);">
+ <form class="form"  method="post" > 
 
     <h2>Sign In<h2>
-            
-            <?php
-           
-            ?>
-                   
-                    <input type="email" name="email" placeholder="Enter Your Email" class="box">
+              
+                    <input type="email" name="email" placeholder="Enter Your Email" class="box" required>
                    <input type="password" name="psw" placeholder="Enter Your Password" class="box"> 
                    
                    <button type="submit" id="submit" placeholder="Sign Up" name="submit">submit</button>
