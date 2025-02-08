@@ -1,49 +1,70 @@
 <?php
-session_start(); // Start the session
+$login = false;
+$error_message = ""; // Variable to store error messages
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require '../database/_dbconnect.php';  // Ensure the correct path for database connection
+    require '../database/_dbconnect.php';
 
     $uemail = trim($_POST['email']);
-    $upass = trim($_POST['psw']); // Trim spaces to avoid mismatch issues
-    
-    // Check if any field is empty
+    $upass = trim($_POST['psw']);
+
     if (empty($uemail) || empty($upass)) {
-        echo '<script>alert("Please fill all details!");</script>';
+        $error_message = "Please fill all details!";
     } else {
-        // Check if user exists in the database
         $sql = "SELECT u_name, u_password FROM `userinfo10m` WHERE `u_email` = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "s", $uemail);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
-        
+
         if ($row = mysqli_fetch_assoc($result)) {
             $stored_hashed_password = $row['u_password'];
-            
-            // Debugging: Log retrieved hash and input password
-            error_log("Stored Hash: " . $stored_hashed_password);
-            error_log("Entered Password: " . $upass);
-            
-            // Verify password
+
             if (password_verify($upass, $stored_hashed_password)) {
-                $_SESSION['user'] = $row['u_name']; // Store user session
-                header("Location: ../user/index.php"); // Redirect to dashboard
+                $login = true;
+                session_start();
+                $_SESSION['user'] = $row['u_name'];
+                $_SESSION['loginn'] = true;
+                header("Location: ../user/index.php");
                 exit();
             } else {
-                error_log("Password verification failed.");
-                echo '<script>alert("Incorrect password! Please try again.");</script>';
+                $error_message = "Incorrect password! Please try again.";
             }
         } else {
-            error_log("User does not exist.");
-            echo '<script>alert("User does not exist! Please sign up.");</script>';
+            $error_message = "User does not exist! Please sign up.";
         }
-        
         mysqli_stmt_close($stmt);
     }
     mysqli_close($conn);
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        .error-message {
+            color: white;
+            background-color: red;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<?php if (!empty($error_message)): ?>
+    <div class="error-message"><?php echo $error_message; ?></div>
+<?php endif; ?>
+
+</body>
+</html>
+
 
 
 

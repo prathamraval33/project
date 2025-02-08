@@ -1,57 +1,87 @@
 <?php
+$error_message = "";
+$success_message = "";
+
 if (isset($_POST['submit'])) {
-    require '../database/_dbconnect.php';  // Ensure the correct path for database connection
-    
-    // Collect and sanitize input data
+    require '../database/_dbconnect.php';
+
     $uname = trim($_POST['name']);
     $uemail = trim($_POST['email']);
     $unumber = trim($_POST['number']);
     $upass = $_POST['psw'];
     $cpassword = $_POST['cpsw'];
-    $errors = [];
 
-    // Check if any field is empty
     if (empty($uname) || empty($uemail) || empty($unumber) || empty($upass) || empty($cpassword)) {
-        $errors[] = "Please fill all details!";
-    }
-
-    // Validate mobile number
-    if (!preg_match('/^[0-9]{10}$/', $unumber)) {
-        $errors[] = "Please enter a valid 10-digit mobile number!";
-    }
-
-    // Validate password match
-    if ($upass !== $cpassword) {
-        $errors[] = "Passwords do not match!";
-    }
-
-    // If there are errors, display them
-    if (!empty($errors)) {
-        foreach ($errors as $error) {
-            echo "<p style='color: red;'>$error</p>";
-        }
+        $error_message = "Please fill all details!";
+    } elseif (!preg_match('/^[0-9]{10}$/', $unumber)) {
+        $error_message = "Please enter a valid 10-digit mobile number!";
+    } elseif ($upass !== $cpassword) {
+        $error_message = "Passwords do not match!";
     } else {
-        // Proceed with database insertion if no errors
-        $hash1 = password_hash($upass, PASSWORD_DEFAULT);
+        $checkQuery = "SELECT * FROM `userinfo10m` WHERE `u_email` = ? OR `u_number` = ?";
+        $stmt = mysqli_prepare($conn, $checkQuery);
+        mysqli_stmt_bind_param($stmt, "ss", $uemail, $unumber);
+        mysqli_stmt_execute($stmt);
+        $checkResult = mysqli_stmt_get_result($stmt);
 
-        // Insert into database
-        $sql = "INSERT INTO `userinfo10m` (`u_name`, `u_number`, `u_email`, `u_password`) 
-                VALUES ('$uname', '$unumber', '$uemail', '$hash1')";
-
-        $result = mysqli_query($conn, $sql);
-
-        // Check if insertion was successful
-        if ($result) {
-            echo '<script>alert("Sign-Up successful!!!");</script>';
-            // Redirect after success
-            header("Location: signin.php");
-            exit();  // Always exit after a redirect to prevent further code execution
+        if (mysqli_num_rows($checkResult) > 0) {
+            $error_message = "User already exists !!!!";
         } else {
-            echo '<script>alert("There was an error with the database submission!");</script>';
+            $hash1 = password_hash($upass, PASSWORD_DEFAULT);
+            $sql = "INSERT INTO `userinfo10m` (`u_name`, `u_number`, `u_email`, `u_password`) 
+                    VALUES (?, ?, ?, ?)";
+
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, "ssss", $uname, $unumber, $uemail, $hash1);
+
+            if (mysqli_stmt_execute($stmt)) {
+                $success_message = "Sign-Up successful! Redirecting...";
+                header("refresh:2;url=signin.php");
+            } else {
+                $error_message = "There was an error with the database submission!";
+            }
         }
+        mysqli_stmt_close($stmt);
     }
+    mysqli_close($conn);
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        .message {
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .error-message {
+            background-color: red;
+        }
+        .success-message {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+
+<?php if (!empty($error_message)): ?>
+    <div class="message error-message"><?php echo $error_message; ?></div>
+<?php endif; ?>
+
+<?php if (!empty($success_message)): ?>
+    <div class="message success-message"><?php echo $success_message; ?></div>
+<?php endif; ?>
+
+</body>
+</html>
+
 
 
 <!DOCTYPE html>

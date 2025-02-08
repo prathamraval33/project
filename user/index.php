@@ -1,5 +1,12 @@
 <?php
-include '../header&footer/header.php';
+
+session_start();
+if (!isset($_SESSION['loginn']) || $_SESSION['loginn'] !== true) {
+    include '../header&footer/header.php';
+} else {
+    include '../header&footer/headerwithlog.php';
+}
+
 include 'slider.php';
 echo"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium quibusdam similique veniam ipsam culpa debitis necessitatibus unde dolor illo voluptates, iste quasi, libero accusamus, harum nostrum quidem placeat nobis adipisci?
 Alias aperiam aliquam, repellat quia, sequi odit pariatur, perspiciatis placeat natus impedit nam. Asperiores, ullam. Earum, modi eum repellat officia, quae, necessitatibus natus iusto dolorem praesentium ut velit expedita! Atque.
