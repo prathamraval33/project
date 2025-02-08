@@ -22,9 +22,9 @@
 
         <!-- Menu -->
         <div class="menu">
-            <a href="header.html">HOME</a>
-            <a href="about.html">ABOUT US</a>
-            <a href="contact.html">CONTACT US</a>
+            <a href="../user/index.php">HOME</a>
+            <a href="../user/about.php">ABOUT US</a>
+            <a href="../user/contact.php">CONTACT US</a>
             
             <div class="dropdown">
                 <a href="#">MOVIE</a>

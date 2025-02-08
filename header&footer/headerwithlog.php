@@ -20,9 +20,9 @@ $name = $_SESSION['user'] ?? "Guest";
     </div>
 
     <div class="menu">
-        <a href="#">Home</a>
-        <a href="#">About Us</a>
-        <a href="#">Contact Us</a>
+        <a href="../user/index.php">Home</a>
+        <a href="../user/about.php">About Us</a>
+        <a href="../user/contact.php">Contact Us</a>
         
         <div class="dropdown">
             <a href="#">Movies</a>
