@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($uemail) || empty($upass)) {
         $error_message = "Please fill all details!";
     } else {
-        $sql = "SELECT u_name, u_password FROM `userinfo10m` WHERE `u_email` = ?";
+        $sql = "SELECT * FROM `userinfo10m` WHERE `u_email` = ?";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "s", $uemail);
         mysqli_stmt_execute($stmt);
@@ -24,6 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $login = true;
                 session_start();
                 $_SESSION['user'] = $row['u_name'];
+                $_SESSION['email'] = $row['u_email'];
+                $_SESSION['number'] = $row['u_number'];
+                
+
                 $_SESSION['loginn'] = true;
                 header("Location: ../user/index.php");
                 exit();

@@ -21,8 +21,7 @@ $name = $_SESSION['user'] ?? "Guest";
 
     <div class="menu">
         <a href="../user/index.php">Home</a>
-        <a href="../user/about.php">About Us</a>
-        <a href="../user/contact.php">Contact Us</a>
+       
         
         <div class="dropdown">
             <a href="#">Movies</a>
@@ -32,6 +31,8 @@ $name = $_SESSION['user'] ?? "Guest";
             </div>
         </div>
         <a href="#">Categories</a>
+         <a href="../user/about.php">About Us</a>
+        <a href="../user/contact.php">Contact Us</a>
     </div>
 
     <div class="search-bar">
@@ -49,7 +50,7 @@ $name = $_SESSION['user'] ?? "Guest";
                 <p> <?php echo htmlspecialchars($name); ?> </p>
 
                 <div class="dropdown-content">
-                    <a href="../login/signup.php" id="signup">Profile</a>
+                    <a href="../user/profile.php" id="signup">Profile</a>
                     <a href="../login/logout.php" id="signin">Logout</a>
                 </div>
             </div>
