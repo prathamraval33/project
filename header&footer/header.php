@@ -30,7 +30,6 @@
                     
                 </div>
             </div>
-            <a href="../user/cat.php">Categories</a>
             <a href="../user/about.php">ABOUT US</a>
             <a href="../user/contact.php">CONTACT US</a>
             
