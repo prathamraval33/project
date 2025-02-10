@@ -11,6 +11,7 @@ if (isset($_POST['submit'])) {
     $upass = $_POST['psw'];
     $cpassword = $_POST['cpsw'];
 
+    // Validation
     if (empty($uname) || empty($uemail) || empty($unumber) || empty($upass) || empty($cpassword)) {
         $error_message = "Please fill all details!";
     } elseif (!preg_match('/^[0-9]{10}$/', $unumber)) {
@@ -18,27 +19,46 @@ if (isset($_POST['submit'])) {
     } elseif ($upass !== $cpassword) {
         $error_message = "Passwords do not match!";
     } else {
-        $checkQuery = "SELECT * FROM `userinfo10m` WHERE `u_email` = ? OR `u_number` = ?";
-        $stmt = mysqli_prepare($conn, $checkQuery);
-        mysqli_stmt_bind_param($stmt, "ss", $uemail, $unumber);
+        // Check if the email already exists
+        $checkEmail = "SELECT u_email FROM userinfo10m WHERE u_email = ?";
+        $stmt = mysqli_prepare($conn, $checkEmail);
+        mysqli_stmt_bind_param($stmt, "s", $uemail);
         mysqli_stmt_execute($stmt);
-        $checkResult = mysqli_stmt_get_result($stmt);
+        mysqli_stmt_store_result($stmt);
 
-        if (mysqli_num_rows($checkResult) > 0) {
-            $error_message = "User already exists !!!!";
+        if (mysqli_stmt_num_rows($stmt) > 0) {
+            $error_message = "Email already registered!";
         } else {
-            $hash1 = password_hash($upass, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO `userinfo10m` (`u_name`, `u_number`, `u_email`, `u_password`) 
-                    VALUES (?, ?, ?, ?)";
+            mysqli_stmt_close($stmt); // Close previous statement
 
-            $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "ssss", $uname, $unumber, $uemail, $hash1);
+            // Check if the username already exists
+            $checkUsername = "SELECT u_name FROM userinfo10m WHERE u_name = ?";
+            $stmt = mysqli_prepare($conn, $checkUsername);
+            mysqli_stmt_bind_param($stmt, "s", $uname);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_store_result($stmt);
 
-            if (mysqli_stmt_execute($stmt)) {
-                $success_message = "Sign-Up successful! Redirecting...";
-                header("refresh:2;url=signin.php");
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                $error_message = "Username already taken!";
             } else {
-                $error_message = "There was an error with the database submission!";
+                mysqli_stmt_close($stmt); // Close previous statement
+
+                // Hash the password
+                $hash1 = password_hash($upass, PASSWORD_DEFAULT);
+
+                // Insert new user
+                $sql = "INSERT INTO userinfo10m (u_name, u_number, u_email, u_password) VALUES (?, ?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $sql);
+                mysqli_stmt_bind_param($stmt, "ssss", $uname, $unumber, $uemail, $hash1);
+
+                if (mysqli_stmt_execute($stmt)) {
+                    mysqli_stmt_close($stmt);
+                    mysqli_close($conn);
+                    header("Location: signin.php");
+                    exit();
+                } else {
+                    $error_message = "Database error!";
+                }
             }
         }
         mysqli_stmt_close($stmt);
@@ -46,6 +66,10 @@ if (isset($_POST['submit'])) {
     mysqli_close($conn);
 }
 ?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
