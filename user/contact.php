@@ -1,4 +1,13 @@
 <?php
+if(isset($_POST['submit']))
+{
+   require '../database/_dbconnect.php';
+
+   $_name=$_POST['name'];
+   $_email=$_POST['email'];
+}
+?>
+<?php
 session_start();
 if (!isset($_SESSION['loginn']) || $_SESSION['loginn'] !== true) {
     include '../header&footer/header.php';
@@ -20,11 +29,11 @@ if (!isset($_SESSION['loginn']) || $_SESSION['loginn'] !== true) {
     <div class="container">
         <h1>Contact Us</h1>
         <p>Have any questions? Fill out the form below.</p>
-        <form class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" rows="4" required></textarea>
-            <button type="submit">Send Message</button>
+        <form class="contact-form" method="post">
+            <input type="text" placeholder="Your Name" required name='name'>
+            <input type="email" placeholder="Your Email" required name='email'>
+            <textarea placeholder="Your Message" rows="4" required maxlength="200"></textarea>
+            <button type="submit" name="submit">Send Message</button>
         </form>
         <a href="index.php" class="back-button">Back to Home</a>
     </div>
