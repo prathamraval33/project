@@ -1,10 +1,24 @@
+.movie-display
+{
+    border-radius: 2px soild black;
+    background-color: rgba(255,240,239);
+    border-radius: 2%;
+}
 .movie-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 20px;
+    padding-left: 0vw;
+    padding-bottom: 10vh;
+    padding-top: 10vh;
     margin: 0 auto;
+    border: 2px solid rgb(30, 30, 30,0.3);
+    margin-left: 2vw;
+    width: 90vw;
+    border-radius: 2%;
+    
+   
 }
 
 .movie-card {
@@ -49,8 +63,15 @@
     background-color: #ff4c39;
 }
 
+h2
+{
+    margin-left: 10vw;
+    color: #ff6f61;
+    display: block;
+}
 
-@media (max-width: 768px) {
+
+/*@media (max-width: 768px) {
     .movie-container {
         justify-content: flex-start;
         padding: 10px;
@@ -71,4 +92,4 @@
         width: 120px;
         height: 300px;  
     }
-}
+}*/

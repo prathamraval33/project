@@ -30,25 +30,26 @@
 
 /* Individual slider item styles */
 .container #slider-img-1 {
-    /* background-image: url(back.jpg); */
-    /* background-position: center; */
-    background-color: black;
+     background-image: url(../img/Captain\ America.png); 
+     background-position: center; 
+    
 }
 
 .container #slider-img-2 {
-    /* background-image: url(popflix.png); */
-    /* background-position: center; */
+     background-image: url(../img/chaava.png); 
+     background-position: center; 
+     background-repeat: no-repeat;
     background-color: antiquewhite;
 }
 
 .container #slider-img-3 {
-    /* background-image: url(profile.png); */
-    /* background-position: center; */
+     background-image: url(../img/DEVA.png); 
+     background-position: center; 
     background-color: aqua;
 }
 
 .container #slider-img-4 {
-    /* background-image: url(img/photo-1600185365483-26d7a4cc7519.jpg); */
+     background-image: url(../img/movifybanner.png); 
     /* background-position: center; */
     background-color: aquamarine;
 }

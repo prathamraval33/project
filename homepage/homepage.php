@@ -11,14 +11,16 @@ $name = $_SESSION['user'] ?? "Guest";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movify</title>
-    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="../css/homepage.css">
 </head>
 
 <body>
 
 <section class="movie-display">
-    <h2>Movies</h2>
+<h2> Now Showing</h2>
     <div class="movie-container">
+    
+    
         <div class="movie-card">
             <img src="https://indianfilmhistory.com/admin_panel_new_dev/media/movies/6642101d4c4f7cd59f04d5d4/chhava-2024-2024-hindi-review2.jpg" alt="Movie 1">
             <h3>CHHAAVA</h3>
