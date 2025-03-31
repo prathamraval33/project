@@ -1,6 +1,6 @@
 <?php
 $login = false;
-$error_message = ""; // Variable to store error messages
+$error_message = ""; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require '../database/_dbconnect.php';
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form</title>
-    <link rel="stylesheet" href="sign.css">
+    <link rel="stylesheet" href="../css/form2.css">
     <style>
 button {
     display: block;
