@@ -1,3 +1,16 @@
+<?php
+// session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['user'])) {
+    // Redirect to sign-in page
+    header("Location: ../login/signin.php");
+    exit();
+}
+
+require '../database/_dbconnect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +22,7 @@
 <body>
     <div class="booking-container">
         <h1>Book Your Tickets</h1>
-        <form action="../Booking/confirm.php" method="POST">
+        <form action="../booking/confirm.php" method="POST">
             <label for="movie">Movie Name:</label>
             <input type="text" id="movie" name="movie" value="<?php echo $_GET['movie']; ?>" readonly>
 

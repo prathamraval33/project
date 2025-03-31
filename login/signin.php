@@ -83,8 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <style>
 button {
     display: block;
-    margin-left: 7vw;
+    margin-left: 9vw;
     margin-top: 4.1vh;
+    margin-bottom:5vh;
     width: 7vw;
     background-color: rgba(0, 0, 0, 0.463);
     box-shadow: inset -3px -3px rgba(0, 0, 0, 0.463);

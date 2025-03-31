@@ -33,7 +33,7 @@ $name = $_SESSION['user'] ?? "Guest";
         
          <a href="../user/about.php">About Us</a>
         <a href="../user/contact.php">Contact Us</a>
-        <a href="../user/ubooking.php">Your Bookings</a>
+        <a href="../user/history.php">Your Bookings</a>
 
     </div>
 
