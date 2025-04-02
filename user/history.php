@@ -8,13 +8,11 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$uname = $_SESSION['user']; // Get logged-in user's name
+$uname = $_SESSION['user'];
 
-// Fetch booking history for the logged-in user
-$query = "SELECT mname, mtime, mtickets, total_amount, booking_date FROM bookinfo10m WHERE uname = '$uname' ORDER BY booking_date DESC";
+// Fetch booking history
+$query = "SELECT mname, mtime, seat_type, mtickets, total_amount, booking_date FROM bookinfo10m WHERE uname='$uname' ORDER BY booking_date DESC";
 $result = mysqli_query($conn, $query);
-
-mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -28,22 +26,25 @@ mysqli_close($conn);
 <body>
     <div class="history-container">
         <h1>Your Booking History</h1>
-        <?php if (mysqli_num_rows($result) > 0): ?>
+
+        <?php if (mysqli_num_rows($result) > 0) : ?>
             <table>
                 <thead>
                     <tr>
-                        <th>Movie Name</th>
+                        <th>Movie</th>
                         <th>Showtime</th>
+                        <th>Seat Type</th>
                         <th>Tickets</th>
                         <th>Total Amount</th>
                         <th>Booking Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                         <tr>
                             <td><?php echo htmlspecialchars($row['mname']); ?></td>
                             <td><?php echo htmlspecialchars($row['mtime']); ?></td>
+                            <td><?php echo htmlspecialchars($row['seat_type']); ?></td>
                             <td><?php echo $row['mtickets']; ?></td>
                             <td>₹<?php echo $row['total_amount']; ?></td>
                             <td><?php echo $row['booking_date']; ?></td>
@@ -51,14 +52,13 @@ mysqli_close($conn);
                     <?php endwhile; ?>
                 </tbody>
             </table>
-        <?php else: ?>
-            <p>No previous bookings found.</p>
+        <?php else : ?>
+            <p>No past bookings found.</p>
         <?php endif; ?>
 
-        <!-- Back to Home Button -->
-        <div class="back-button">
-            <a href="../user/index.php">⬅️ Back to Home</a>
-        </div>
+        <a href="../user/index.php" class="back-button">Back to Home</a>
     </div>
 </body>
 </html>
+
+<?php mysqli_close($conn); ?>
