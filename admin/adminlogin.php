@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['role'] = $row['astatus']; // Store role
 
             if ($role === 'admin') {
-                header("Location: adminhome.php"); // Redirect Admin
+                header("Location: dashboard.php"); // Redirect Admin
             } elseif ($role === 'superadmin') {
                 header("Location: superadminhomepage.php"); // Redirect Superadmin
             }

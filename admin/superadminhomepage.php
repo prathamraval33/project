@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require '../database/_dbconnect.php';
 
 // Check if logged-in user is a Superadmin
@@ -40,24 +42,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Superadmin Dashboard</title>
-    <link rel="stylesheet" href="../css/ahome.css">
+    <link rel="stylesheet" href="../css/sahome.css">
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Superadmin Panel</h2>
+<div class="sidebar">
+        <h2>Super-Admin Panel</h2>
         <ul>
             <li><a href="dashboard.php"> Dashboard</a></li>
-            <li><a href="manage_users.php"> Manage Users</a></li>
-            <li><a href="manage_bookings.php"> Manage Bookings</a></li>
-            <li><a href="manage_admins.php"> Manage Admins</a></li>
-            <li><a href="../index.php"> Back to Home</a></li>
-            <li><a href="../logout.php" class="logout">🚪 Logout</a></li>
+            <li><a href="manbook.php">Manage Admins</a></li>
+            <li><a href="manbook.php">Manage Bookings</a></li>
+            <li><a href="upload_image.php">Add Movies</a></li>
+            <li><a href="delete_movie.php">Delete Movies</a></li>
+            
+            <li><a href="../logout.php" class="logout"> Logout</a></li>
         </ul>
-    </div>
-
-    <div class="main-content">
-        <h1>Welcome, Superadmin!</h1>
-        <p>Use the navigation menu to manage the website.</p>
-    </div>
+</div>
 </body>
 </html>

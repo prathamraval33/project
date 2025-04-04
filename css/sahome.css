@@ -1,4 +1,4 @@
-/* ahome.css and sahome.css merged and conditionally loaded based on role */
+/* dashboard.css for Admin Dashboard */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -7,7 +7,6 @@ body {
     background-color: #f4f7fa;
     color: #333;
     display: flex;
-    min-height: 100vh;
 }
 
 .sidebar {
@@ -64,7 +63,6 @@ body {
     flex-grow: 1;
     background-color: #fff;
     min-height: 100vh;
-    box-sizing: border-box;
 }
 
 h1 {

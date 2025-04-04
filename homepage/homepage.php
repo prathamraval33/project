@@ -1,54 +1,61 @@
 <?php
+require '../database/_dbconnect.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$name = $_SESSION['user'] ?? "Guest"; 
+
+$name = $_SESSION['user'] ?? "Guest";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movify</title>
     <link rel="stylesheet" href="../css/homepage.css">
 </head>
-
 <body>
 
+<!-- Now Showing Section -->
 <section class="movie-display">
-<h2> Now Showing</h2>
-    <div class="movie-container">
-    
-    
-        <div class="movie-card">
-            <img src="https://indianfilmhistory.com/admin_panel_new_dev/media/movies/6642101d4c4f7cd59f04d5d4/chhava-2024-2024-hindi-review2.jpg" alt="Movie 1">
-            <h3>CHHAAVA</h3>
-            <button onclick="window.location.href='booking.php?movie=CHHAAVA'">Book Now</button>
-        </div>
-        <div class="movie-card">
-            <img src="https://img.indiaforums.com/movie/350x525/7/306-sky-force.jpg?c=6mN077" alt="Movie 2">
-            <h3>SKY FORCE</h3>
-            <button onclick="window.location.href='booking.php?movie=SKY FORCE'">Book Now</button>
-        </div>
-        <div class="movie-card">
-            <img src="https://assetscdn1.paytm.com/images/cinema/Umbarro--30a7bcf0-b7a9-11ef-b2e6-3b922ebbcf80.jpg?format=webp" alt="Movie 3">
-            <h3>UMBARRO</h3>
-            <button onclick="window.location.href='booking.php?movie=UMBARRO'">Book Now</button>
-        </div>
-        <div class="movie-card">
-            <img src="https://m.media-amazon.com/images/M/MV5BNDRjY2E0ZmEtN2QwNi00NTEwLWI3MWItODNkMGYwYWFjNGE0XkEyXkFqcGc@.V1.jpg" alt="Movie 4">
-            <h3>BRAVE NEW WORLD</h3>
-            <button onclick="window.location.href='booking.php?movie=BRAVE NEW WORLD'">Book Now</button>
-        </div>
-        <div class="movie-card">
-            <img src="https://m.media-amazon.com/images/M/MV5BMWQ2Mzc3OTItYzIzMi00ZDhhLTg2MjktMzhlNGQ4ZmI1MjIzXkEyXkFqcGc@.V1.jpg" alt="Movie 5">
-            <h3>DEVA</h3>
-            <button onclick="window.location.href='booking.php?movie=DEVA'">Book Now</button>
-        </div>
+    <h2>Now Showing</h2>
+    <div class="movie-container" id="movie">
+        <?php
+        $sql = "SELECT * FROM movies WHERE status = 'now_showing'";
+        $result = mysqli_query($conn, $sql);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '
+            <div class="movie-card">
+                <img src="' . $row['image_url'] . '" alt="' . $row['title'] . '">
+                <h3>' . $row['title'] . '</h3>
+                <button onclick="window.location.href=\'booking.php?movie=' . urlencode($row['title']) . '\'">Book Now</button>
+            </div>';
+        }
+        ?>
+    </div>
+</section>
+
+<!-- Upcoming Movies Section -->
+<section class="movie-display">
+    <h2>Upcoming Movies</h2>
+    <div class="movie-container" id="upcoming-movie">
+        <?php
+        $sql_upcoming = "SELECT * FROM movies WHERE status = 'upcoming'";
+        $result_upcoming = mysqli_query($conn, $sql_upcoming);
+
+        while ($row = mysqli_fetch_assoc($result_upcoming)) {
+            echo '
+            <div class="movie-card">
+                <img src="' . $row['image_url'] . '" alt="' . $row['title'] . '">
+                <h3>' . $row['title'] . '</h3>
+                <button disabled>Coming Soon</button>
+            </div>';
+        }
+        ?>
     </div>
 </section>
 
 </body>
-
 </html>
+

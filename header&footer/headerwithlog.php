@@ -26,7 +26,7 @@ $name = $_SESSION['user'] ?? "Guest";
         <div class="dropdown">
             <a href="#">Movies</a>
             <div class="dropdown-content">
-                <a href="#">Now Showing</a>
+                <a href="../homepage/homepage.php#moive">Now Showing</a>
                 <a href="#">Upcoming</a>
             </div>
         </div>

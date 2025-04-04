@@ -2,27 +2,30 @@
 session_start();
 require '../database/_dbconnect.php';
 
-// Check if user is admin
-
-
-// Handle DELETE request
-if (isset($_GET['bookid'])) {
-    $bookid = intval($_GET['bookid']); // Ensure it's an integer
-
-    $delete_query = "DELETE FROM bookinfo10m WHERE bookid='$bookid'";
-    mysqli_query($conn, $delete_query);
-    header("Location: manbook.php"); // Refresh page
+// Optional: Restrict access to admin/superadmin only
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: ../admin_login.php");
     exit();
 }
 
-// Handle UPDATE request
+// DELETE booking
+if (isset($_GET['bookid'])) {
+    $bookid = intval($_GET['bookid']);
+    $delete_query = "DELETE FROM bookinfo10m WHERE bookid='$bookid'";
+    mysqli_query($conn, $delete_query);
+    header("Location: manbook.php");
+    exit();
+}
+
+// UPDATE booking
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
-    $bookid = intval($_POST['bookid']); // Ensure it's an integer
+    $bookid = intval($_POST['bookid']);
     $movie = htmlspecialchars($_POST['movie']);
     $showtime = htmlspecialchars($_POST['showtime']);
     $seatType = htmlspecialchars($_POST['seatType']);
     $tickets = (int)$_POST['tickets'];
-    $price_per_ticket = ($seatType == "Gold") ? 200 : (($seatType == "Silver") ? 150 : 300);
+
+    $price_per_ticket = ($seatType == "gold") ? 200 : (($seatType == "silver") ? 150 : 300);
     $total_amount = $tickets * $price_per_ticket;
 
     $update_query = "UPDATE bookinfo10m SET 
@@ -32,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                         mtickets='$tickets', 
                         total_amount='$total_amount' 
                     WHERE bookid='$bookid'";
-
     mysqli_query($conn, $update_query);
     header("Location: manbook.php");
     exit();
@@ -49,59 +51,11 @@ $result = mysqli_query($conn, $query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Bookings</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #001f3f;
-            color: white;
-            text-align: center;
-        }
-        .container {
-            width: 90%;
-            margin: 20px auto;
-            background: white;
-            color: #001f3f;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background: #ff6f61;
-            color: white;
-        }
-        form {
-            display: inline;
-        }
-        .btn {
-            padding: 6px 10px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 2px;
-        }
-        .edit {
-            background: #ffa502;
-            color: white;
-        }
-        .delete {
-            background: #ff4757;
-            color: white;
-        }
-        .btn:hover {
-            opacity: 0.8;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/manbook.css">
 </head>
 <body>
+
+<?php include 'adminhome.php'; ?>
 
 <h1>Manage Bookings</h1>
 <div class="container">
@@ -133,9 +87,9 @@ $result = mysqli_query($conn, $query);
                 </td>
                 <td>
                     <select name="seatType">
-                        <option value="Gold" <?php if ($row['seat_type'] == 'Gold') echo 'selected'; ?>>Gold</option>
-                        <option value="Silver" <?php if ($row['seat_type'] == 'Silver') echo 'selected'; ?>>Silver</option>
-                        <option value="Platinum" <?php if ($row['seat_type'] == 'Platinum') echo 'selected'; ?>>Platinum</option>
+                        <option value="gold" <?php if ($row['seat_type'] == 'gold') echo 'selected'; ?>>Gold</option>
+                        <option value="silver" <?php if ($row['seat_type'] == 'silver') echo 'selected'; ?>>Silver</option>
+                        <option value="platinum" <?php if ($row['seat_type'] == 'platinum') echo 'selected'; ?>>Platinum</option>
                     </select>
                 </td>
                 <td><input type="number" name="tickets" value="<?php echo $row['mtickets']; ?>" min="1" max="10"></td>
@@ -144,13 +98,13 @@ $result = mysqli_query($conn, $query);
                 <td>
                     <input type="hidden" name="bookid" value="<?php echo $row['bookid']; ?>">
                     <button type="submit" name="update" class="btn edit">Update</button>
-                    <a href="manbook.php?bookid=<?php echo $row['bookid']; ?>" class="btn delete">Delete</a>
+                    <a href="manbook.php?bookid=<?php echo $row['bookid']; ?>" class="btn delete" onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </form>
         </tr>
         <?php } ?>
     </table>
-    <a href="../admin/adminhome.php" class="btn" style="background: #003366; color: white;">Back to Admin Panel</a>
+    <a href="../admin/adminhome.php" class="btn back">Back to Admin Panel</a>
 </div>
 
 </body>
