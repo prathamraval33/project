@@ -1,46 +1,40 @@
-
 <?php
-// Start session only if it's not already active
-if (!isset($_SESSION)) {
-    session_start();
+session_start();
+
+if (!isset($_SESSION['email'])) {
+    header("Location: ../login/login.php");
+    exit();
 }
 
 $name = $_SESSION['user'] ?? "Guest";
-$email = $_SESSION['email'] ?? "Email@1.com";
-$mob = $_SESSION['number'] ?? "134567890";
+$email = $_SESSION['email'] ?? "Not Available";
+$number = $_SESSION['number'] ?? "Not Available";
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Dashboard</title>
+    <title>User Profile</title>
     <link rel="stylesheet" href="../css/profile.css">
-   
 </head>
 <body>
+
 <div class="sidebar">
-        <ul>
-            <li data-title="Profile">&#9733;</li>
-            <li data-title="Bookings">&#128722;</li>
-            <li data-title="Settings">&#9881;</li>
-        </ul>
+    <h2>Welcome</h2>
+    <a href="../user/updateuser.php">Update Profile</a>
+    <a href="../user/index.php">Homepage</a>
+    <a href="../login/logout.php">Logout</a>
+</div>
+
+<div class="main-content">
+    <h1>👤 User Profile</h1>
+    <div class="profile-box">
+        <p><strong>Name:</strong> <?php echo htmlspecialchars($name); ?></p>
+        <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
+        <p><strong>Mobile Number:</strong> <?php echo htmlspecialchars($number); ?></p>
     </div>
-    <div class="content">
-        <div class="profile-card">
-            <div class="banner">Welcome to Movify</div>
-            <img src="https://cdn-icons-png.flaticon.com/512/12828/12828286.png" alt="Profile Image" class="profile-img">
-            <div class="info-container">
-                <h2>Profile</h2>
-                <div class="info"><strong>Username:</strong>  <p> <?php echo htmlspecialchars($name); ?> </p></div>
-                <div class="info"><strong>Mobile:</strong>  <p> <?php echo htmlspecialchars($mob); ?> </p></div>
-                <div class="info"><strong>Email:</strong>  <p> <?php echo htmlspecialchars($email); ?> </p></div>
-                <a href="../user/index.php"><button class="save-btn">Home</button></a>
-            </div>
-        </div>
-    </div>
+</div>
+
 </body>
 </html>

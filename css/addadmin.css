@@ -1,0 +1,52 @@
+.admin-form-container {
+    margin-left: 260px;
+    padding: 40px;
+    background-color: #fff;
+    min-height: 100vh;
+}
+
+.admin-form-container h2 {
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 400px;
+    background: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    background-color: #003366;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0059b3;
+}
+
+.success {
+    color: green;
+    margin-bottom: 15px;
+}
+
+.error {
+    color: red;
+    margin-bottom: 15px;
+}

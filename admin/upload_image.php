@@ -1,6 +1,8 @@
 <?php
 require '../database/_dbconnect.php';
 
+$message = ''; // Initialize message
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = mysqli_real_escape_string($conn, $_POST['title']);
     $status = strtolower(mysqli_real_escape_string($conn, $_POST['status'])); // Ensure lowercase
@@ -12,16 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (move_uploaded_file($imageTmp, $uploadPath)) {
         $sql = "INSERT INTO movies (title, image_url, status) VALUES ('$title', '$uploadPath', '$status')";
         if (mysqli_query($conn, $sql)) {
-            echo "✅ Movie uploaded successfully!";
+            $message = "✅ Movie uploaded successfully!";
         } else {
-            echo "❌ Database Error: " . mysqli_error($conn);
+            $message = "❌ Database Error: " . mysqli_error($conn);
         }
     } else {
-        echo "❌ Error uploading image.";
+        $message = "❌ Error uploading image.";
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,11 +32,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../css/upload_movie.css">
 </head>
 <body>
-    <?php
-    include 'adminhome.php'
-    ?>
+    <?php include 'adminhome.php'; ?>
+
     <div class="upload-container">
         <h2>Upload New Movie</h2>
+
+        <?php if (!empty($message)) : ?>
+            <div class="upload-message"><?= $message ?></div>
+        <?php endif; ?>
+
         <form action="" method="POST" enctype="multipart/form-data">
             <label for="title">Movie Title:</label>
             <input type="text" name="title" id="title" required>

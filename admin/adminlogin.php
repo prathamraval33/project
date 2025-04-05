@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($role === 'admin') {
                 header("Location: dashboard.php"); // Redirect Admin
             } elseif ($role === 'superadmin') {
-                header("Location: superadminhomepage.php"); // Redirect Superadmin
+                header("Location: dashboard.php"); // Redirect Superadmin
             }
             exit();
         } else {

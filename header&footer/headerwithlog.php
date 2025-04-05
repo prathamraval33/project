@@ -27,7 +27,7 @@ $name = $_SESSION['user'] ?? "Guest";
             <a href="#">Movies</a>
             <div class="dropdown-content">
                 <a href="../homepage/homepage.php#moive">Now Showing</a>
-                <a href="#">Upcoming</a>
+                <a href="../homepage/homepage.php#upcoming-movie">Upcoming</a>
             </div>
         </div>
         
@@ -37,10 +37,7 @@ $name = $_SESSION['user'] ?? "Guest";
 
     </div>
 
-    <div class="search-bar">
-        <input type="text" placeholder="Search movies, Categories or theaters">
-        <button>Search</button>
-    </div>
+    
 
     <!-- User Section -->
     <div class="sign">

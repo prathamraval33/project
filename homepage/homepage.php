@@ -13,11 +13,14 @@ $name = $_SESSION['user'] ?? "Guest";
     <meta charset="UTF-8">
     <title>Movify</title>
     <link rel="stylesheet" href="../css/homepage.css">
+   
 </head>
 <body>
 
 <!-- Now Showing Section -->
 <section class="movie-display">
+<a href="../user/index.php" class="home-button">← Home</a>
+
     <h2>Now Showing</h2>
     <div class="movie-container" id="movie">
         <?php
@@ -38,6 +41,7 @@ $name = $_SESSION['user'] ?? "Guest";
 
 <!-- Upcoming Movies Section -->
 <section class="movie-display">
+    <a href="../user/index.php" class="home-button">← Home</a>
     <h2>Upcoming Movies</h2>
     <div class="movie-container" id="upcoming-movie">
         <?php
@@ -58,4 +62,3 @@ $name = $_SESSION['user'] ?? "Guest";
 
 </body>
 </html>
-

@@ -27,33 +27,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Check if email or mobile number already exists
         $checkQuery = "SELECT * FROM userinfo10m WHERE u_email = ? OR u_number = ?";
         $stmt = mysqli_prepare($conn, $checkQuery);
-        mysqli_stmt_bind_param($stmt, "ss", $uemail, $unumber);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_store_result($stmt);
 
-        if (mysqli_stmt_num_rows($stmt) > 0) {
-            $error_message = "User already exists with this email or mobile number!";
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "ss", $uemail, $unumber);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_store_result($stmt);
+
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                $error_message = "User already exists with this email or mobile number!";
+            } else {
+                // Generate OTP
+                $otp = rand(100000, 999999);
+                $_SESSION['otp'] = $otp;
+                $_SESSION['uname'] = $uname;
+                $_SESSION['uemail'] = $uemail;
+                $_SESSION['unumber'] = $unumber;
+                $_SESSION['upass'] = password_hash($upass, PASSWORD_DEFAULT);
+
+                // Redirect to send.php for sending OTP
+                header("Location: send.php");
+                exit();
+            }
+
+            mysqli_stmt_close($stmt); // ✅ safely close if prepared
         } else {
-            // Close the statement after use
-            mysqli_stmt_close($stmt);
-            
-            // Generate OTP
-            $otp = rand(100000, 999999);
-            $_SESSION['otp'] = $otp;
-            $_SESSION['uname'] = $uname;
-            $_SESSION['uemail'] = $uemail;
-            $_SESSION['unumber'] = $unumber;
-            $_SESSION['upass'] = password_hash($upass, PASSWORD_DEFAULT);
-            
-            // Redirect to send.php for sending OTP
-            header("Location: send.php");
-            exit();
+            $error_message = "Something went wrong. Please try again later.";
         }
     }
-    mysqli_stmt_close($stmt); // Removed duplicate closing statement
+
     mysqli_close($conn);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,17 +69,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
-<?php if (!empty($error_message)): ?>
-    <p style="color: red;"><?php echo $error_message; ?></p>
-<?php endif; ?>
-
 <form method="post">
     <h2>Sign Up</h2>
-    <input type="text" name="name" placeholder="Enter Your Name">
-    <input type="text" name="number" placeholder="Enter Your Mobile Number">
-    <input type="email" name="email" placeholder="Enter Your Email">
-    <input type="password" name="psw" placeholder="Enter Your Password">
-    <input type="password" name="cpsw" placeholder="Re-Enter Your Password">
+
+    <?php if (!empty($error_message)): ?>
+        <p style="color: red;"><?php echo $error_message; ?></p>
+    <?php endif; ?>
+
+    <input type="text" name="name" placeholder="Enter Your Name" required>
+    <input type="text" name="number" placeholder="Enter Your Mobile Number" required>
+    <input type="text" name="email" placeholder="Enter Your Email" required>
+    <input type="password" name="psw" placeholder="Enter Your Password" required>
+    <input type="password" name="cpsw" placeholder="Re-Enter Your Password" required>
     <button type="submit">Submit</button>
 </form>
 
