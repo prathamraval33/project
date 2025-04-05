@@ -2,7 +2,6 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require '../database/_dbconnect.php';
 
-    // Check if form fields exist before accessing them
     $name = isset($_POST['name']) ? trim($_POST['name']) : "";
     $email = isset($_POST['email']) ? trim($_POST['email']) : "";
     $mess = isset($_POST['mess']) ? trim($_POST['mess']) : "";
@@ -23,13 +22,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     mysqli_close($conn);
 }
-?>
-<?php
+
+// Start session and handle header
 session_start();
 if (!isset($_SESSION['loginn']) || $_SESSION['loginn'] !== true) {
     include '../header&footer/header.php';
+    $userName = '';
+    $userEmail = '';
 } else {
     include '../header&footer/headerwithlog.php';
+    $userName = $_SESSION['user'] ?? '';
+    $userEmail = $_SESSION['email'] ?? '';
 }
 ?>
 
@@ -46,8 +49,8 @@ if (!isset($_SESSION['loginn']) || $_SESSION['loginn'] !== true) {
         <h1>Contact Us</h1>
         <p>Have any questions? Fill out the form below.</p>
         <form class="contact-form" method="post">
-            <input type="text" placeholder="Your Name" required name="name">
-            <input type="email" placeholder="Your Email" required name="email">
+            <input type="text" placeholder="Your Name" required name="name" value="<?php echo htmlspecialchars($userName); ?>">
+            <input type="email" placeholder="Your Email" required name="email" value="<?php echo htmlspecialchars($userEmail); ?>">
             <textarea placeholder="Your Message" rows="4" required maxlength="200" name="mess"></textarea>
             <button type="submit" name="submit">Send Message</button>
         </form>

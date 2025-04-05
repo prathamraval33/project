@@ -4,7 +4,7 @@ require '../database/_dbconnect.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user'])) {
-    header("Location: ../signin.php");
+    header("Location: ../login/signin.php");
     exit();
 }
 
