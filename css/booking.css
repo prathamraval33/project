@@ -1,12 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9; /* Previous background color */
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
 }
 
 .booking-container {
     width: 50%;
+    max-width: 600px;
     margin: 50px auto;
     background: #fff;
     padding: 20px;
@@ -16,7 +17,7 @@ body {
 
 h1 {
     text-align: center;
-    color: #ff6f61; /* Previous title color */
+    color: #ff6f61;
 }
 
 form {
@@ -29,28 +30,60 @@ label {
     margin: 10px 0 5px;
 }
 
-input, select {
+input,
+select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
 }
 
 button {
     margin-top: 20px;
     padding: 10px;
-    background: #ff6f61; /* Previous button color */
+    background: #ff6f61;
     color: white;
     border: none;
+    border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 button:hover {
-    background: #e65a50; /* Previous hover color */
+    background: #e65a50;
 }
 
 #totalPrice {
     font-weight: bold;
     margin-top: 10px;
     font-size: 18px;
-    color: #ff6f61; /* Matching text color */
+    color: #ff6f61;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    .booking-container {
+        width: 90%;
+        margin: 30px auto;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    input,
+    select {
+        font-size: 0.95rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+
+    #totalPrice {
+        font-size: 16px;
+    }
 }

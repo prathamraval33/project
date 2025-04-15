@@ -21,12 +21,12 @@ function sendOTP() {
         $mail->isSMTP();                                            
         $mail->Host       = 'smtp.gmail.com';                       
         $mail->SMTPAuth   = true;                                   
-        $mail->Username   = 'journeymate261@gmail.com';            
-        $mail->Password   = 'urixpciosipgtiax'; // Use App Password        
+        $mail->Username   = 'movify64@gmail.com';            
+        $mail->Password   = 'rofsjvjxploeypvb';        
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           
         $mail->Port       = 465;                                   
 
-        $mail->setFrom('journeymate261@gmail.com', 'Journey Mate');
+        $mail->setFrom('movify64@gmail.com', 'Movify');
         $mail->addAddress($_SESSION['uemail'], $_SESSION['uname']);
 
         $mail->isHTML(true);

@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $showtime = htmlspecialchars($_POST['showtime']);
     $seatType = htmlspecialchars($_POST['seatType']);
     $tickets = (int)$_POST['tickets'];
-    $bookingDate = date("Y-m-d H:i:s");
+    $bookingDate = date("Y-m-d H:i:s"); // Keep booking date
 
     // Price Calculation
     $price_per_ticket = ($seatType == "Gold") ? 200 : (($seatType == "Silver") ? 150 : 300);
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               VALUES ('$uname', '$movie', '$showtime', '$seatType', '$tickets', '$total_amount', '$bookingDate')";
 
     if (mysqli_query($conn, $query)) {
-        $message = "✅ Booking Confirmed!";
+        $message = " Booking Confirmed!";
     } else {
         $message = "❌ Error: " . mysqli_error($conn);
     }

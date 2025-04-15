@@ -6,12 +6,10 @@ require '../database/_dbconnect.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user'])) {
-    // Redirect to sign-in page
     header("Location: ../login/signin.php");
     exit();
 }
 
-// Get movie name from URL
 $movie = isset($_GET['movie']) ? htmlspecialchars($_GET['movie']) : "Unknown Movie";
 ?>
 
@@ -35,6 +33,13 @@ $movie = isset($_GET['movie']) ? htmlspecialchars($_GET['movie']) : "Unknown Mov
             var totalPrice = price * tickets;
             document.getElementById("totalPrice").innerText = "Total Price: ₹" + totalPrice;
         }
+
+        // Set minimum date to today
+        window.onload = function () {
+            const dateInput = document.getElementById("date");
+            const today = new Date().toISOString().split("T")[0];
+            dateInput.setAttribute("min", today);
+        };
     </script>
 </head>
 <body>
@@ -44,6 +49,9 @@ $movie = isset($_GET['movie']) ? htmlspecialchars($_GET['movie']) : "Unknown Mov
             
             <label for="movie">Movie Name:</label>
             <input type="text" id="movie" name="movie" value="<?php echo $movie; ?>" readonly>
+
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date" required>
 
             <label for="showtime">Showtime:</label>
             <select id="showtime" name="showtime" required>
